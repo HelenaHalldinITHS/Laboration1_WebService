@@ -15,6 +15,6 @@ public class KiloToStoneConverter implements KiloConverter {
 
     @Override
     public String getDescription() {
-        return "Converts kilo to stone";
+        return "Convert kilo to stone";
     }
 }
