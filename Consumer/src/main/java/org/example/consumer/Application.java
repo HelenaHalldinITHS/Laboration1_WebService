@@ -2,6 +2,7 @@ package org.example.consumer;
 
 import org.example.converter.KiloConverter;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.ServiceLoader;
 
@@ -15,21 +16,16 @@ public class Application {
     }
 
     public void run() {
-        double weightInKg = getWeightToConvert();
-        switch (getUnitChoice()) {
-            case 1 -> printWeight(weightInKg, "Pounds");
-            case 2 -> printWeight(weightInKg, "Stone");
-            default -> print("Invalid input");
-        }
-    }
+        List<KiloConverter> converters = serviceLoader.stream().map(ServiceLoader.Provider::get).toList();
 
-    private int getUnitChoice() {
-        print("""
-                Enter the number corresponding to the unit you want to convert to:
-                1. Pound
-                2. Stone
-                """);
-        return Integer.parseInt(getStringInput());
+        while (true) {
+            double weightInKg = getWeightToConvert();
+            int choice = getChoice(converters);
+            if (choice == 0)
+                break;
+            KiloConverter converter = converters.get(choice - 1);
+            printWeight(converter, weightInKg);
+        }
     }
 
     private double getWeightToConvert() {
@@ -37,14 +33,21 @@ public class Application {
         return Double.parseDouble(getStringInput());
     }
 
-    private void printWeight(double weightInKg, String unit) {
-        serviceLoader.stream()
-                .filter(provider -> provider.type().getSimpleName().contains(unit))
-                .map(ServiceLoader.Provider::get)
-                .forEach(converter -> printWeightWithSymbol(converter, weightInKg));
+    private int getChoice(List<KiloConverter> converters) {
+        print("Enter the number corresponding to the choice you want to make.\n" +
+                "Available options are:");
+        printChoices(converters);
+        return Integer.parseInt(getStringInput());
     }
 
-    private void printWeightWithSymbol(KiloConverter converter, double weightInKg) {
+    private void printChoices(List<KiloConverter> converters) {
+        print("0. Exit");
+        for (int i = 0; i < converters.size(); i++) {
+            print(i + 1 + ". " + converters.get(i).description());
+        }
+    }
+
+    private void printWeight(KiloConverter converter, double weightInKg) {
         print(converter.convert(weightInKg) + " " + converter.getSymbol());
     }
 
