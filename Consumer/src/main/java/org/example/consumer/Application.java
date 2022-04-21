@@ -19,22 +19,22 @@ public class Application {
         switch (getUnitChoice()) {
             case 1 -> printWeight(weightInKg, "Pounds");
             case 2 -> printWeight(weightInKg, "Stone");
-            default -> System.out.println("Invalid input");
+            default -> print("Invalid input");
         }
     }
 
     private int getUnitChoice() {
-        System.out.println("""
+        print("""
                 Enter the number corresponding to the unit you want to convert to:
                 1. Pound
                 2. Stone
                 """);
-        return Integer.parseInt(scanner.nextLine());
+        return Integer.parseInt(getStringInput());
     }
 
     private double getWeightToConvert() {
-        System.out.println("Enter the weight you want to convert (in kg): ");
-        return Double.parseDouble(scanner.nextLine());
+        print("Enter the weight you want to convert (in kg): ");
+        return Double.parseDouble(getStringInput());
     }
 
     private void printWeight(double weightInKg, String unit) {
@@ -45,7 +45,15 @@ public class Application {
     }
 
     private void printWeightWithSymbol(KiloConverter converter, double weightInKg) {
-        System.out.println(converter.convert(weightInKg) + " " + converter.getSymbol());
+        print(converter.convert(weightInKg) + " " + converter.getSymbol());
+    }
+
+    private void print(String s) {
+        System.out.println(s);
+    }
+
+    private String getStringInput() {
+        return scanner.nextLine();
     }
 
 }
