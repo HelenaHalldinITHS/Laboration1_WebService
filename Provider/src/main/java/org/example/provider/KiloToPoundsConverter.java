@@ -14,7 +14,7 @@ public class KiloToPoundsConverter implements KiloConverter {
     }
 
     @Override
-    public String description() {
+    public String getDescription() {
         return "Converts kilo to pounds";
     }
 }

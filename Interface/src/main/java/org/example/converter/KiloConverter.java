@@ -5,5 +5,5 @@ public interface KiloConverter {
 
     String getSymbol();
 
-    String description();
+    String getDescription();
 }

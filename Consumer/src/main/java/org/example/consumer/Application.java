@@ -43,7 +43,7 @@ public class Application {
     private void printChoices(List<KiloConverter> converters) {
         print("0. Exit");
         for (int i = 0; i < converters.size(); i++) {
-            print(i + 1 + ". " + converters.get(i).description());
+            print(i + 1 + ". " + converters.get(i).getDescription());
         }
     }
 
