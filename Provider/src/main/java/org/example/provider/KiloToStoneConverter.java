@@ -12,4 +12,9 @@ public class KiloToStoneConverter implements KiloConverter {
     public String getSymbol() {
         return "st";
     }
+
+    @Override
+    public String description() {
+        return "Converts kilo to stone";
+    }
 }

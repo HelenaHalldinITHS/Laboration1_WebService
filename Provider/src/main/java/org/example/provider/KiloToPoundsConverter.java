@@ -12,4 +12,9 @@ public class KiloToPoundsConverter implements KiloConverter {
     public String getSymbol() {
         return "lb";
     }
+
+    @Override
+    public String description() {
+        return "Converts kilo to pounds";
+    }
 }
