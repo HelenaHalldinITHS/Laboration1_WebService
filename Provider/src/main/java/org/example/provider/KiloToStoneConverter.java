@@ -5,6 +5,11 @@ import org.example.converter.KiloConverter;
 public class KiloToStoneConverter implements KiloConverter {
     @Override
     public double convert(double kg) {
-        return kg *  0.15747;
+        return kg * 0.15747;
+    }
+
+    @Override
+    public String getSymbol() {
+        return "st";
     }
 }
