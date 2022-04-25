@@ -1,6 +1,7 @@
 package org.example.consumer;
 
 import org.example.converter.KiloConverter;
+import org.example.converter.WeightConverter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +18,7 @@ public class Application {
 
     public void run() {
         List<KiloConverter> converters = serviceLoader.stream().map(ServiceLoader.Provider::get).toList();
-
+        printWelcomeMessage(converters);
         while (true) {
             double weightInKg = getWeightToConvert();
             int choice = getChoice(converters);
@@ -25,6 +26,13 @@ public class Application {
                 break;
             KiloConverter converter = converters.get(choice - 1);
             printWeight(converter, weightInKg);
+        }
+    }
+
+    private void printWelcomeMessage(List<KiloConverter> converters) {
+        print("Welcome! This application helps you convert weight(from kilo), available goal units are: ");
+        for (KiloConverter converter : converters) {
+            print(converter.getClass().getAnnotation(WeightConverter.class).goalUnit());
         }
     }
 
