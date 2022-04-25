@@ -3,7 +3,7 @@ package org.example.provider;
 import org.example.converter.KiloConverter;
 import org.example.converter.WeightConverter;
 
-@WeightConverter(goalUnit = "pounds", startUnit = "kilo")
+@WeightConverter(goalUnit = "stone", startUnit = "kilo")
 public class KiloToStoneConverter implements KiloConverter {
     @Override
     public double convert(double kg) {
